@@ -1,0 +1,113 @@
+import './App.css';
+import React, { useEffect, useState } from 'react'
+function App() {
+  const [employees, setEmployee] = useState([])
+  const [first_name, setFirstName] = useState("");
+  const [last_name, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [id,setId]=useState(null)
+
+  useEffect(() => {
+    getEmployees();
+  }, [])
+  function getEmployees() {
+    fetch("http://localhost:8089/employees").then((result) => {
+      result.json().then((resp) => {
+        // console.warn(resp)
+        setEmployee(resp)
+        setFirstName(resp[0].first_name)
+        setLastName(resp[0].last_name)
+        setEmail(resp[0].email)
+        setId(resp[0].id)
+      })
+    })
+  }
+
+  function deleteEmployee(id) {
+    fetch(`http://localhost:8080/employees/${id}`, {
+      method: 'DELETE'
+    }).then((result) => {
+      result.json().then((resp) => {
+        console.warn(resp)
+        getEmployees()
+      })
+    })
+  }
+
+  function addEmployee(){
+      //implement add function here
+  }
+
+  function viewEmployee(id)
+  {
+    let item=employees[id-1];
+    setName(item.first_name)
+    setName(item.last_name)
+    setEmail(item.email)
+    setId(item.id)
+  }
+
+  function updateEmployee()
+  {
+    let item={first_name, last_name,email}
+    console.warn("item",item)
+    fetch(`http://localhost:8089/employees/${id}`, {
+      method: 'PUT',
+      headers:{
+        'Accept':'application/json',
+        'Content-Type':'application/json'
+      },
+      body:JSON.stringify(item)
+    }).then((result) => {
+      result.json().then((resp) => {
+        console.warn(resp)
+        getEmployees()
+      })
+    })
+  }
+
+  return (
+    <div className="App">
+        <h1>Update Employee Data With API </h1>
+
+        <div>
+            <button onClick={() => addEmployee(item.id)}>Add Employee</button>
+        </div>
+
+      <table border="1" style={{ float: 'left' }}>
+        <tbody>
+          <tr>
+            <td>ID</td>
+            <td>Employee First Name</td>
+            <td>Employee Last Name</td>
+            <td>Employee Email ID</td>
+            <td>Actions</td>
+          </tr>
+          {
+            employees.map((item, i) =>
+              <tr key={i}>
+                <td>{item.id}</td>
+                <td>{item.first_name}</td>
+                <td>{item.last_name}</td>
+                <td>{item.email}</td>
+                <td><button onClick={() => updateEmployee(item.id)}>Update</button></td>
+                <td><button onClick={() => deleteEmployee(item.id)}>Delete</button></td>
+                <td><button onClick={() => viewEmployee(item.id)}>View</button></td>
+
+              </tr>
+            )
+          }
+        </tbody>
+      </table>
+
+      
+      <div>
+        <input type="text" value={first_name} onChange={(e)=>{setFirstName(e.target.value)}} /> <br /><br />
+        <input type="text" value={last_name} onChange={(e)=>{setLastName(e.target.value)}} /> <br /><br />
+        <input type="text" value={email} onChange={(e)=>{setEmail(e.target.value)}} /> <br /><br />
+        <button onClick={updateEmployee} >Update Employee</button>  
+      </div>
+    </div>
+  );
+}
+export default App;
