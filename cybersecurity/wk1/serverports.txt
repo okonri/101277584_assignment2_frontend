@@ -1,0 +1,25 @@
+
+What is the definition of server port?
+
+Entry way through which an internet or other network message is to be forwarded when it arrives at a server.
+
+
+What is server port range?
+Port numbers range from 0 to 65535, but only port numbers 0 to 1023 are reserved for privileged services and designated as well-known ports.
+
+How many bits does number above represent?
+16-bit unsigned integer.
+
+State 10 common server ports
+
+Ports 20 and 21. FTP is used to transfer files between a client and a server.
+Port 22. Secure Shell is one of several tunneling protocols used to build secure network connections.
+Port 25. Simple Mail Transfer Protocol (SMTP) is commonly used for email.
+Port 53. Domain name system (DNS) is a critical process that matches human-readable domain names to machine-readable IP addresses on the modern internet. It helps users load websites and applications without typing in a long list of IP addresses.
+Port 80. HTTP is the protocol that enables the World Wide Web.
+Port 123. Network Time Protocol helps computer clocks sync with each other. It's a vital process in encryption
+Port 179. Border Gateway Protocol (BGP) helps establish efficient routes between the large networks or autonomous systems that make up the internet. These large networks use BGP to broadcast which IP addresses they control.
+
+Port 443. HTTP Secure (HTTPS) is like HTTP but more secure. All HTTPS web traffic goes straight to port 443. Any network service that uses HTTPS for encryption, such as DNS over HTTPS, also connects directly to this port.
+Port 500. Internet Security Association and Key Management Protocol helps set up secure IP Security
+Port 3389. Remote Desktop Protocol enables users to connect to their desktop computers from another device remotely.
